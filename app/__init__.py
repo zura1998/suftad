@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from app.extensions import db, migrate
+from app.extensions import db, migrate, login_manager
 
 
 def create_app(config_file='config.py'):
@@ -17,4 +17,6 @@ def create_app(config_file='config.py'):
 def register_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
+    login_manager.init_app(app)
+
 
