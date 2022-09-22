@@ -43,13 +43,13 @@ class BaseModel():
 
 class User(db.Model, UserMixin, BaseModel):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    username = db.Column(db.String(50))
     email = db.Column(db.String(70))
     password = db.Column(db.Integer)
-    events = db.relationship('Event', backref='user', lazy=True)
+    events = db.relationship('Event', backref='users', lazy=True)
 
-    def __init__(self, name, email, password):
-        self.name = name
+    def __init__(self, username, email, password):
+        self.username = username
         self.email = email
         self.password_hash = generate_password_hash(password)
 
@@ -76,6 +76,6 @@ class Event(db.Model, BaseModel):
         self.user_id = user_id
 
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
+# @login_manager.user_loader
+# def load_user(user_id):
+#     return User.query.get(user_id)

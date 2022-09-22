@@ -7,7 +7,7 @@ from app import db
 
 user_blueprint = Blueprint('user',
                            __name__,
-                           template_folder='templates')
+                           template_folder='templates/users')
 
 
 @user_blueprint.route('/registration', methods=['GET', 'POST'])
@@ -17,7 +17,9 @@ def registration():
     if form.validate_on_submit():
         user = User(email=form.email.data,
                     username=form.username.data,
-                    password=form.password.data, )
+                    password=form.confirm_password.data)
+        print(form.password.data)
+        print(form.confirm_password.data)
 
         user.save_to_db()
 

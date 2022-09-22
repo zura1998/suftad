@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+    {% extends "base.html" %}
+    {% block content %}
+    <div class="container-fluid">
+
+        <form style="padding: 30px" method="POST">
+          <!-- Name input -->
+            {{form.hidden_tag()}}
+          <div class="form-outline mb-4">
+<!--              bootstrap -->
+<!--            <label class="form-label" for="form4Example1">Name:</label>-->
+<!--            <input type="text" id="form4Example1" class="form-control" />-->
+            {{form.username.label(class='form-label')}}
+            {{form.username(class='form-control')}}
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            {{form.email.label(class="form-label")}}
+            {{form.email(class="form-control")}}
+          </div>
+
+           <!-- password input -->
+          <div class="form-outline mb-4">
+            {{form.password.label(class="form-label")}}
+            {{form.password(class="form-control")}}
+          </div>
+
+           <!-- password confirm input -->
+          <div class="form-outline mb-4">
+            {{form.confirm_password.label(class="form-label")}}
+            {{form.confirm_password(class="form-control")}}
+          </div>
+
+
+
+          <!-- Submit button -->
+<!--          <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>-->
+          {{form.submit(class="btn btn-primary btn-block mb-4")}}
+        </form>
+    </div>
+
+    {% endblock %}
+</body>
+</html>
