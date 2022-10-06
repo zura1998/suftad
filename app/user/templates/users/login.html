@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+</head>
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+    {{ message }}
+    {% endfor %}
+
+
+
+<form method="post" style="padding: 30px" >
+    {{form.hidden_tag()}}
+    {%if form.errors %}
+        {% for error in form.errors %}
+            error
+        {% endfor %}
+         error in form.errors }
+    {% endif %}
+
+    <div class="form-outline mb-4">
+    {{form.email.label(class="form-label")}}
+            {{form.email(class="form-control")}}
+    </div>
+    <!-- password input -->
+    <div class="form-outline mb-4">
+    {{form.password.label(class="form-label")}}
+    {{form.password(class="form-control")}}
+    </div>
+    {{form.submit(class="btn btn-primary btn-block mb-4")}}
+</form>
+{% endblock %}
+</body>
+</html>
