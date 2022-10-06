@@ -18,13 +18,10 @@ def registration():
         user = User(email=form.email.data,
                     username=form.username.data,
                     password=form.confirm_password.data)
-        print(form.password.data)
-        print(form.confirm_password.data)
-
-        user.save_to_db()
-
-        flash("რეგისტრაცია წარმატებით დასრულდა")
-        return redirect(url_for('user.login'))
+        if form.validate_email_from_db():
+            user.save_to_db()
+            flash("რეგისტრაცია წარმატებით დასრულდა")
+            return redirect(url_for('user.login'))
 
     return render_template('registration.html', form=form)
 
@@ -32,8 +29,12 @@ def registration():
 @user_blueprint.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.find_by_email(form.email.data)
+        print(user.username)
+        print(form.password.data)
+        print(user.check_password('nato123'))
 
         if user is not None and user.check_password(form.password.data):
             login_user(user)
@@ -42,8 +43,7 @@ def login():
             next = request.args.get('next')
 
             if next is None:
-                next = url_for('welcome')
+                next = url_for('home')
 
             return redirect(next)
-
     return render_template('login.html', form=form)

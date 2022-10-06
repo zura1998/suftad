@@ -7,6 +7,12 @@
 <body>
     {% extends "base.html" %}
     {% block content %}
+     {% if get_flashed_messages() %}
+        {% for message in get_flashed_messages() %}
+             {{ message }}
+         {% endfor %}
+        {% endif %}
+
     <div class="container-fluid">
 
         <form style="padding: 30px" method="POST">
